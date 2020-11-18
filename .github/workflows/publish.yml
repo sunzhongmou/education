@@ -22,9 +22,6 @@ jobs:
       - name: npm test
         run: npm test
         
-      - name: whoami
-        run: npm whoami
-        
       - run: npm run package
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
