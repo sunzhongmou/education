@@ -9,24 +9,32 @@
   "homepage": "https://github.com/sunzhongmou/education/tree/master/packages/math#readme",
   "license": "MIT",
   "main": "lib/math.js",
+  "types": "lib/math.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "lib",
+    "!.DS_Store"
   ],
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sunzhongmou/education.git"
+    "url": "git+https://github.com/sunzhongmou/education.git",
+    "directory": "packages/math"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "audit-moderate": "npm install && npm audit --audit-level=moderate",
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "tsc": "tsc"
   },
   "bugs": {
     "url": "https://github.com/sunzhongmou/education/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.2"
   }
 }

@@ -1,6 +1,6 @@
 import * as DDD from '../src/ddd'
 
-describe('@gitaction/ddd', () => {
+describe('@sunzhongmou/ddd', () => {
   it('interface for ddd Entity', () => {
     class Entity implements DDD.Entity {
       id: string
