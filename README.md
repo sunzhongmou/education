@@ -1,5 +1,5 @@
 # education
-Toolkit for GitAction
+Education context from sunzhongmou.com
 
 ![education-unit-tests](https://github.com/sunzhongmou/education/workflows/education-unit-tests/badge.svg)
 ![education-audit](https://github.com/sunzhongmou/education/workflows/education-audit/badge.svg)
