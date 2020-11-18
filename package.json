@@ -1,0 +1,50 @@
+{
+  "name": "root",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Toolkit for GitAction",
+  "scripts": {
+    "audit-all": "lerna run audit-moderate",
+    "bootstrap": "lerna bootstrap",
+    "package": "lerna publish -y from-package",
+    "build": "lerna run tsc",
+    "check-all": "concurrently \"npm:format-check\" \"npm:lint\" \"npm:test\" \"npm:build -- -- --noEmit\"",
+    "format": "prettier --write packages/**/*.ts",
+    "format-check": "prettier --check packages/**/*.ts",
+    "lint": "eslint packages/**/*.ts",
+    "new-package": "scripts/create-package",
+    "test": "jest --testTimeout 10000"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.13.5",
+    "@types/signale": "^1.2.1",
+    "@typescript-eslint/parser": "^2.2.7",
+    "concurrently": "^4.1.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-github": "^2.0.0",
+    "eslint-plugin-jest": "^22.5.1",
+    "flow-bin": "^0.115.0",
+    "jest": "^25.1.0",
+    "jest-circus": "^24.7.1",
+    "lerna": "^3.18.4",
+    "prettier": "^1.19.1",
+    "ts-jest": "^25.4.0",
+    "typescript": "^3.7.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunzhongmou/education.git"
+  },
+  "keywords": [
+    "sunzhongmou",
+    "education",
+    "ddd"
+  ],
+  "author": "github.com/sunwei",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sunzhongmou/education/issues"
+  },
+  "homepage": "https://github.com/sunzhongmou/education#readme"
+}
