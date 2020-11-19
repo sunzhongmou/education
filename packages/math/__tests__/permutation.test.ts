@@ -1,4 +1,4 @@
-import {getSequenceFromNumber, getRandomPermutationFromSequence} from '../src/permutation'
+import {getSequenceFromNumber, getFullPermutationFromSequence} from '../src/permutation'
 
 describe('permutation tests', () => {
   it('get sequence from number', () => {
@@ -12,7 +12,7 @@ describe('permutation tests', () => {
   it('get random permutation from number', () => {
     let n = 10
     const seq = getSequenceFromNumber(n)
-    const per = getRandomPermutationFromSequence(seq)
+    const per = getFullPermutationFromSequence(seq)
 
     expect(per.length).toEqual((n + 1) * (n + 1))
   })
