@@ -24,6 +24,12 @@ export class Expression implements DDD.ValueObject {
     )
   }
 
+  getRaw(): string {
+    return `${this.destinationOperand}${
+      this.operation === Operations.ADD ? ' + ' : ' - '
+    }${this.operand} =`
+  }
+
   execute(): number {
     switch (this.operation) {
       case Operations.ADD:

@@ -12,4 +12,12 @@ describe('mathematical expression operations', () => {
 
     expect(expression.execute()).toEqual(1)
   })
+
+  it('get raw expression', () => {
+    const eAdd = new Expression(6, Operations.ADD, 5)
+    const eSub = new Expression(6, Operations.SUB, 5)
+
+    expect(eAdd.getRaw()).toEqual('6 + 5 =')
+    expect(eSub.getRaw()).toEqual('6 - 5 =')
+  })
 })
