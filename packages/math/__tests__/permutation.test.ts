@@ -7,7 +7,7 @@ import {
 } from '../src/permutation'
 
 describe('permutation tests', () => {
-  it('get sequence from number', () => {
+  it('given number when generate sequence then step 1 sequence created', () => {
     const seq = getSequence(10)
 
     expect(seq.includes(5)).toBeTruthy()
@@ -16,7 +16,7 @@ describe('permutation tests', () => {
     expect(seq[5] > seq[4]).toBeTruthy()
   })
 
-  it('get full permutation from number', () => {
+  it('given sequence when get full permutation then permutation list created', () => {
     const n = 10
     const seq = getSequence(n)
     const per = getFullPermutation(seq)
@@ -24,7 +24,7 @@ describe('permutation tests', () => {
     expect(per.length).toEqual((n + 1) * (n + 1))
   })
 
-  it('get descending permutation from number', () => {
+  it('given descending sequence when get permutation then reverse permutation list created', () => {
     const n = 10
     const seq = getSequence(n).reverse()
     const per = getDescendingPermutation(seq)
@@ -34,7 +34,7 @@ describe('permutation tests', () => {
     expect(ele[0] > ele[1]).toBeTruthy()
   })
 
-  it('get random element from sequence', () => {
+  it('given random index when pick element then element in list found', () => {
     const n = 10
     const seq = getSequence(n)
     const per = getFullPermutation(seq)
@@ -43,7 +43,7 @@ describe('permutation tests', () => {
     expect(per.includes(ele)).toBeTruthy()
   })
 
-  it('get random elements from sequence', () => {
+  it('given list when pick elements with specified capacity then list with right capacity created', () => {
     const per = [[1], [2], [3], [4], [5]]
     const elements = randomPickElements(per, 6)
 

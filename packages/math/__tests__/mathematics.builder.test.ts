@@ -1,7 +1,7 @@
 import {MathematicsBuilder} from '../src/mathematics.builder'
 
 describe('mathematics builder', () => {
-  it('build 50 add sub questions within 10', () => {
+  it('given builder with add and sub and fill expression capacity when build and generate raw question then question list created', () => {
     const builder = new MathematicsBuilder()
     const mathematics = builder
       .withAdd(25)

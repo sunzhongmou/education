@@ -2,7 +2,7 @@ import {Exercise, QuestionType} from '../src/exercise'
 import {Expression, Operations} from '../src/expression'
 
 describe('exercise behaviors', () => {
-  it('generate raw questions', () => {
+  it('given expressions when generate raw questions then raw question list created', () => {
     const rawQuestions = [
       new Expression(6, Operations.ADD, 4),
       new Expression(6, Operations.SUB, 4)
@@ -12,7 +12,7 @@ describe('exercise behaviors', () => {
     expect(exercise.generateRawQuestions()).toEqual(['6 + 4 =', '6 - 4 ='])
   })
 
-  it('generate fill questions', () => {
+  it('given expressions when generate fill questions then fill question list created', () => {
     const fillQuestions = [
       new Expression(6, Operations.ADD, 4),
       new Expression(6, Operations.SUB, 4)
@@ -22,7 +22,7 @@ describe('exercise behaviors', () => {
     expect(exercise.generateFillQuestions()[1].includes('__')).toBeTruthy()
   })
 
-  it('generate mixed questions', () => {
+  it('given expressions when generate raw and fill questions then mixed question list created', () => {
     const questions = [
       new Expression(6, Operations.ADD, 4),
       new Expression(6, Operations.SUB, 4)
@@ -37,7 +37,7 @@ describe('exercise behaviors', () => {
     expect(generatedQuestions[3].includes('__')).toBeTruthy()
   })
 
-  it('add questions by type', () => {
+  it('given expressions with type when check specified questions list then new added question found', () => {
     const exercise = new Exercise([], [])
     exercise.addQuestion(new Expression(6, Operations.ADD, 4), QuestionType.RAW)
     exercise.addQuestion(
