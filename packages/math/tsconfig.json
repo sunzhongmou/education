@@ -1,6 +1,5 @@
 {
   "extends": "../../tsconfig.json",
-  "noImplicitAny": false,
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./lib",
