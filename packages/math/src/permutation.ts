@@ -40,7 +40,7 @@ function takeRandomValueFromNumber(n: number): number {
   return Math.floor(Math.random() * n)
 }
 
-export function shuffle(array: number[][]): number[][] {
+export function shuffle<T>(array: T[]): T[] {
   let currentIndex: number = array.length,
     temporaryValue,
     randomIndex
