@@ -15,7 +15,7 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: npm install
-      - run: cd ./packages/math && npm install
+      - run: cd ./packages/math && npm install && cd ../../
       
       - name: Compile
         run: npm run build
