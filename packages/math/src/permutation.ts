@@ -20,5 +20,39 @@ export function getDescendingPermutation(sequence: number[]): number[][] {
 }
 
 export function randomPickElement(sequence: number[][]): number[] {
-  return sequence[Math.floor(Math.random() * sequence.length)]
+  return sequence[takeRandomValueFromNumber(sequence.length)]
+}
+
+export function randomPickElements(
+  sequence: number[][],
+  capacity: number
+): number[][] {
+  const startIndex = takeRandomValueFromNumber(sequence.length)
+  let sourceArray = sequence
+  if (startIndex + capacity > sequence.length) {
+    sourceArray = sequence.concat(sequence)
+  }
+
+  return sourceArray.slice(startIndex, startIndex + capacity)
+}
+
+function takeRandomValueFromNumber(n: number): number {
+  return Math.floor(Math.random() * n)
+}
+
+export function shuffle(array: number[][]): number[][] {
+  let currentIndex: number = array.length,
+    temporaryValue,
+    randomIndex
+
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex)
+    currentIndex -= 1
+
+    temporaryValue = array[currentIndex]
+    array[currentIndex] = array[randomIndex]
+    array[randomIndex] = temporaryValue
+  }
+
+  return array
 }

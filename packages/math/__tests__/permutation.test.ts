@@ -2,7 +2,8 @@ import {
   getSequence,
   getFullPermutation,
   getDescendingPermutation,
-  randomPickElement
+  randomPickElement,
+  randomPickElements
 } from '../src/permutation'
 
 describe('permutation tests', () => {
@@ -40,5 +41,12 @@ describe('permutation tests', () => {
     const ele = randomPickElement(per)
 
     expect(per.includes(ele)).toBeTruthy()
+  })
+
+  it('get random elements from sequence', () => {
+    const per = [[1], [2], [3], [4], [5]]
+    const elements = randomPickElements(per, 6)
+
+    expect(elements.length).toBe(6)
   })
 })

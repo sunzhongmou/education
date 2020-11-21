@@ -1,67 +1,51 @@
-/**
- * Interface for DDD Entity
- *
- * has a life cycle
- * has a unique identifier
- * Judge the equality by ID
- * Addition, deletion and modification-persistence
- * Variable state/value
- */
-export interface Entity {
-  id: string
-  sameIdentityAs(other: Entity): boolean
-}
+import {Exercise, QuestionType} from './exercise'
+import {Expression, Operations} from './expression'
+import {
+  getDescendingPermutation,
+  getFullPermutation,
+  getSequence,
+  randomPickElements,
+  shuffle
+} from './permutation'
 
-/**
- * Interface for DDD ValueObject
- *
- * Descriptive
- * No unique identification
- * Judging equivalence by attributes
- * Instant creation/destruction can be destroyed
- * Immutable
- */
-export interface ValueObject {
-  sameValueAs(other: ValueObject): boolean
-}
+export class Math {
+  maximum: number
+  exercise: Exercise
+  sequence: number[]
+  addExpressions: Expression[]
+  subExpressions: Expression[]
 
-/**
- * Interface for DDD AggregateRoot
- *
- * Responsible for implementing business rules
- * With a globally unique identifier
- * Objects outside the aggregation can only refer to the aggregation, not directly to objects inside the aggregation
- * Objects within the boundary can have other aggregate root references
- * Objects within the boundary need to have the same life cycle as the aggregate root
- * Only the aggregate root directly interacts with the persistence layer
- */
-export interface AggregateRoot extends Entity {}
+  constructor() {
+    this.maximum = 10
+    this.exercise = new Exercise([], [])
+    this.sequence = getSequence(10)
+    this.addExpressions = []
+    this.subExpressions = []
+  }
 
-/**
- * Interface for DDD DomainService
- *
- * Domain service can be regarded as a unified external interface of the domain layer aggregation,
- * Used to encapsulate the behavior of aggregation (so that the aggregation root can be Immutable),
- * Achieve persistence and protection for Domain Model.
- */
-export interface DomainService {}
+  generateAddQuestions(velocity: number): void {
+    const per = shuffle(
+      getFullPermutation(this.sequence).filter(
+        ele => ele[0] + ele[1] <= this.maximum
+      )
+    )
+    const randomElements = randomPickElements(per, velocity)
+    for (const ele of randomElements) {
+      this.addExpressions.push(new Expression(ele[0], Operations.ADD, ele[1]))
+    }
+  }
 
-/**
- * Interface for DDD Repository
- *
- * Persistent warehouse, requires interface implemented by system persistence layer
- */
-export interface Repository {}
+  generateSubQuestions(velocity: number): void {
+    const per = shuffle(getDescendingPermutation(this.sequence))
+    const randomElements = randomPickElements(per, velocity)
+    for (const ele of randomElements) {
+      this.subExpressions.push(new Expression(ele[0], Operations.SUB, ele[1]))
+    }
+  }
 
-/**
- * Interface for DDD DomainEvent
- *
- * With unique identification
- * No life cycle
- * Notification|Command event
- */
-export interface DomainEvent {
-  sameEventAs(other: DomainEvent): boolean
-  getEventBody(): string
-  getEventId(): string
+  // generateQuestions(rawVelocity: number, fillVelocity: number): void {
+  //   let expressions: Expression[] = []
+  //   expressions = expressions.concat(this.addExpressions).concat(this.subExpressions)
+  //  
+  // }
 }
