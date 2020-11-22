@@ -8,9 +8,9 @@ export class MathematicsBuilder {
 
   constructor() {
     this.withinTen = true
-    this.addCapacity = 25
-    this.subCapacity = 25
-    this.fillCapacity = 4
+    this.addCapacity = 0
+    this.subCapacity = 0
+    this.fillCapacity = 0
   }
 
   inTen(): MathematicsBuilder {
