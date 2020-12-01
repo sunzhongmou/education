@@ -1,0 +1,41 @@
+{
+  "name": "@sunzhongmou/design-pattern",
+  "version": "0.0.1",
+  "description": "Design Patterns",
+  "keywords": [
+    "Design Pattern"
+  ],
+  "author": "sunwei <me@sunwei.xyz>",
+  "homepage": "https://github.com/sunzhongmou/education/tree/master/packages/design-pattern#readme",
+  "license": "MIT",
+  "main": "lib/design-pattern.js",
+  "types": "lib/design-pattern.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib",
+    "!.DS_Store"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunzhongmou/education.git",
+    "directory": "packages/design-pattern"
+  },
+  "scripts": {
+    "audit-moderate": "npm install && npm audit --audit-level=moderate",
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "tsc": "tsc"
+  },
+  "bugs": {
+    "url": "https://github.com/sunzhongmou/education/issues"
+  },
+  "devDependencies": {
+  },
+  "dependencies": {
+  }
+}
