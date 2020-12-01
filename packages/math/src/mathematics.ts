@@ -7,6 +7,8 @@ import {
   randomPickElements,
   shuffle
 } from './permutation'
+import {SourceInput} from "./rule/sourceInput";
+import {Rule} from "@sunzhongmou/design-pattern/lib/rule";
 
 export class Mathematics {
   maximum: number
@@ -23,10 +25,10 @@ export class Mathematics {
     this.subExpressions = []
   }
 
-  generateAddQuestions(velocity: number): void {
+  generateAddQuestions(velocity: number, rules: Rule<SourceInput>): void {
     const per = shuffle(
       getFullPermutation(this.sequence).filter(
-        ele => ele[0] + ele[1] <= this.maximum
+        ele => rules.isSatisfied(new SourceInput(ele[0], ele[1]))
       )
     )
     const randomElements = randomPickElements(per, velocity)

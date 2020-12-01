@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@sunzhongmou/ddd": "0.0.1",
+    "@sunzhongmou/design-pattern": "0.0.1",
     "uuid": "^8.3.0"
   }
 }
