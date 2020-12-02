@@ -22,7 +22,6 @@ describe('mathematics builder', () => {
       .withMaximum(20)
       .build()
     const result = mathematics.generate()
-    console.log(result)
 
     expect(result.length).toEqual(50)
   })

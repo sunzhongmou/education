@@ -1,7 +1,12 @@
 import {Mathematics} from './mathematics'
-import {AddResultLessOrEqualTo10Rule} from "./rule/AddResultLessOrEqualTo10Rule";
-import {SourceInput} from "./rule/sourceInput";
-import {And} from "@sunzhongmou/design-pattern/lib/and";
+import {AddResultLessOrEqualTo10Rule} from './rule/AddResultLessOrEqualTo10Rule'
+import {SourceInput} from './rule/sourceInput'
+import {And} from '@sunzhongmou/design-pattern/lib/and'
+import {AddResultGreaterOrEqualTo10Rule} from './rule/AddResultGreaterOrEqualTo10Rule'
+import {AddResultLessOrEqualTo20Rule} from './rule/AddResultLessOrEqualTo20Rule'
+import {SubResultGreaterOrEqualTo0Rule} from './rule/SubResultGreaterOrEqualTo0Rule'
+import {DestOperandGreaterOrEqualTo10Rule} from './rule/DestOperandGreaterOrEqualTo10Rule'
+import {getSequence} from "./permutation";
 
 export class MathematicsBuilder {
   maximum: number
@@ -37,10 +42,40 @@ export class MathematicsBuilder {
   }
 
   build(): Mathematics {
-    const mathematics = new Mathematics(this.maximum)
-    const rules = new And<SourceInput>([]).addRule(new AddResultLessOrEqualTo10Rule())
+    if (this.maximum === 10) {
+      return this.buildTen()
+    } else {
+      return this.buildTwenty()
+    }
+  }
+
+  buildTen(): Mathematics {
+    const mathematics = new Mathematics(getSequence(10))
+    const rules = new And<SourceInput>([]).addRule(
+      new AddResultLessOrEqualTo10Rule()
+    )
     mathematics.generateAddQuestions(this.addCapacity, rules)
-    mathematics.generateSubQuestions(this.subCapacity)
+    const subRules = new And<SourceInput>([]).addRule(
+      new SubResultGreaterOrEqualTo0Rule()
+    )
+    mathematics.generateSubQuestions(this.subCapacity, subRules)
+    mathematics.generateQuestions(
+      this.addCapacity + this.subCapacity - this.fillCapacity,
+      this.fillCapacity
+    )
+    return mathematics
+  }
+
+  buildTwenty(): Mathematics {
+    const mathematics = new Mathematics(getSequence(20))
+    const rules = new And<SourceInput>([])
+      .addRule(new AddResultGreaterOrEqualTo10Rule())
+      .addRule(new AddResultLessOrEqualTo20Rule())
+    mathematics.generateAddQuestions(this.addCapacity, rules)
+    const subRules = new And<SourceInput>([])
+      .addRule(new SubResultGreaterOrEqualTo0Rule())
+      .addRule(new DestOperandGreaterOrEqualTo10Rule())
+    mathematics.generateSubQuestions(this.subCapacity, subRules)
     mathematics.generateQuestions(
       this.addCapacity + this.subCapacity - this.fillCapacity,
       this.fillCapacity

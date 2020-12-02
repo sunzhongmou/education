@@ -3,32 +3,29 @@ import {Expression, Operations} from './expression'
 import {
   getDescendingPermutation,
   getFullPermutation,
-  getSequence,
   randomPickElements,
   shuffle
 } from './permutation'
-import {SourceInput} from "./rule/sourceInput";
-import {Rule} from "@sunzhongmou/design-pattern/lib/rule";
+import {SourceInput} from './rule/sourceInput'
+import {Rule} from '@sunzhongmou/design-pattern/lib/rule'
 
 export class Mathematics {
-  maximum: number
   exercise: Exercise
   sequence: number[]
   addExpressions: Expression[]
   subExpressions: Expression[]
 
-  constructor(max: number) {
-    this.maximum = max
+  constructor(sequence: number[]) {
+    this.sequence = sequence
     this.exercise = new Exercise([], [])
-    this.sequence = getSequence(10)
     this.addExpressions = []
     this.subExpressions = []
   }
 
   generateAddQuestions(velocity: number, rules: Rule<SourceInput>): void {
     const per = shuffle(
-      getFullPermutation(this.sequence).filter(
-        ele => rules.isSatisfied(new SourceInput(ele[0], ele[1]))
+      getFullPermutation(this.sequence).filter(ele =>
+        rules.isSatisfied(new SourceInput(ele[0], ele[1]))
       )
     )
     const randomElements = randomPickElements(per, velocity)
@@ -37,8 +34,12 @@ export class Mathematics {
     }
   }
 
-  generateSubQuestions(velocity: number): void {
-    const per = shuffle(getDescendingPermutation(this.sequence.reverse()))
+  generateSubQuestions(velocity: number, rules: Rule<SourceInput>): void {
+    const per = shuffle(
+      getDescendingPermutation(this.sequence.reverse()).filter(ele =>
+        rules.isSatisfied(new SourceInput(ele[0], ele[1]))
+      )
+    )
     const randomElements = randomPickElements(per, velocity)
     for (const ele of randomElements) {
       this.subExpressions.push(new Expression(ele[0], Operations.SUB, ele[1]))
