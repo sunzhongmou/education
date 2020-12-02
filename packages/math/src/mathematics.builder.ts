@@ -6,7 +6,7 @@ import {AddResultGreaterOrEqualTo10Rule} from './rule/AddResultGreaterOrEqualTo1
 import {AddResultLessOrEqualTo20Rule} from './rule/AddResultLessOrEqualTo20Rule'
 import {SubResultGreaterOrEqualTo0Rule} from './rule/SubResultGreaterOrEqualTo0Rule'
 import {DestOperandGreaterOrEqualTo10Rule} from './rule/DestOperandGreaterOrEqualTo10Rule'
-import {getSequence} from "./permutation";
+import {getSequence} from './permutation'
 
 export class MathematicsBuilder {
   maximum: number
