@@ -7,8 +7,8 @@ import {AddResultLessOrEqualTo20Rule} from './rule/AddResultLessOrEqualTo20Rule'
 import {SubResultGreaterOrEqualTo0Rule} from './rule/SubResultGreaterOrEqualTo0Rule'
 import {DestOperandGreaterOrEqualTo10Rule} from './rule/DestOperandGreaterOrEqualTo10Rule'
 import {getSequence} from './permutation'
-import {DestOperandLessOrEqualTo10Rule} from "./rule/DestOperandLessOrEqualTo10Rule";
-import {OperandLessOrEqualTo10Rule} from "./rule/OperandLessOrEqualTo10Rule";
+import {DestOperandLessOrEqualTo10Rule} from './rule/DestOperandLessOrEqualTo10Rule'
+import {OperandLessOrEqualTo10Rule} from './rule/OperandLessOrEqualTo10Rule'
 
 export class MathematicsBuilder {
   maximum: number
@@ -81,7 +81,9 @@ export class MathematicsBuilder {
       .addRule(new AddResultGreaterOrEqualTo10Rule())
       .addRule(new AddResultLessOrEqualTo20Rule())
     if (this.operandsInTen) {
-      rules.addRule(new DestOperandLessOrEqualTo10Rule()).addRule(new OperandLessOrEqualTo10Rule())
+      rules
+        .addRule(new DestOperandLessOrEqualTo10Rule())
+        .addRule(new OperandLessOrEqualTo10Rule())
     }
     mathematics.generateAddQuestions(this.addCapacity, rules)
     const subRules = new And<SourceInput>([])
