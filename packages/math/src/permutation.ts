@@ -10,6 +10,19 @@ export function getFullPermutation(sequence: number[]): number[][] {
   )
 }
 
+export function getIteratedPermutation(
+  sequence: number[],
+  permutation: number[][]
+): number[][] {
+  return sequence.reduce(
+    (iteratedPermutation, currentValue) =>
+      iteratedPermutation.concat(
+        permutation.map(ele => [...ele, currentValue])
+      ),
+    <number[][]>[]
+  )
+}
+
 export function getDescendingPermutation(sequence: number[]): number[][] {
   const permutation = <number[][]>[]
   return permutation.concat(

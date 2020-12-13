@@ -3,7 +3,7 @@ import {
   getFullPermutation,
   getDescendingPermutation,
   randomPickElement,
-  randomPickElements
+  randomPickElements, getIteratedPermutation
 } from '../src/permutation'
 
 describe('permutation tests', () => {
@@ -22,6 +22,16 @@ describe('permutation tests', () => {
     const per = getFullPermutation(seq)
 
     expect(per.length).toEqual((n + 1) * (n + 1))
+    expect(per[0].length).toEqual(2)
+  })
+
+  it('given sequence and permutation when get iterated permutation then permutation list created', () => {
+    const n = 10
+    const seq = getSequence(n)
+    const per = getFullPermutation(seq)
+    const iPer = getIteratedPermutation(seq, per)
+
+    expect(iPer.length).toEqual((n + 1) * (n + 1) * (n + 1))
   })
 
   it('given descending sequence when get permutation then reverse permutation list created', () => {
