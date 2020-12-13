@@ -33,7 +33,7 @@ describe('permutation tests', () => {
     const iPer = getIteratedPermutation(seq, per)
 
     expect(iPer.length).toEqual((n + 1) * (n + 1) * (n + 1))
-    expect(per[0].length).toEqual(3)
+    expect(iPer[0].length).toEqual(3)
   })
 
   it('given descending sequence when get permutation then reverse permutation list created', () => {
