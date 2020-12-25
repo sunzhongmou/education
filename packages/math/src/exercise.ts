@@ -49,7 +49,10 @@ export class Exercise implements DDD.Entity {
       let rawQuestion = exp.getRaw()
       const hiddenOperand = Math.random() >= 0.5
       if (hiddenOperand) {
-        rawQuestion = rawQuestion.replace(`${exp.operand}`, '__')
+        rawQuestion = rawQuestion.replace(
+          `${exp.operationSets[0].operand}`, //TODO: need refactor
+          '__'
+        )
       } else {
         rawQuestion = rawQuestion.replace(`${exp.destinationOperand}`, '__')
       }

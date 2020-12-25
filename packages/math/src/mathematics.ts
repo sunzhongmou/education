@@ -3,6 +3,7 @@ import {Expression, Operations} from './expression'
 import {
   getDescendingPermutation,
   getFullPermutation,
+  getIteratedPermutation,
   randomPickElements,
   shuffle
 } from './permutation'
@@ -31,6 +32,35 @@ export class Mathematics {
     const randomElements = randomPickElements(per, velocity)
     for (const ele of randomElements) {
       this.addExpressions.push(new Expression(ele[0], Operations.ADD, ele[1]))
+    }
+  }
+
+  generateLoopAddQuestions(
+    velocity: number,
+    rules: Rule<SourceInput>,
+    secondRules: Rule<SourceInput>
+  ): void {
+    const per = getFullPermutation(this.sequence)
+    const iPer = getIteratedPermutation(this.sequence, per)
+
+    const permutation = shuffle(
+      iPer.filter(
+        ele =>
+          rules.isSatisfied(new SourceInput(ele[0], ele[1])) &&
+          secondRules.isSatisfied(
+            new SourceInput(
+              new Expression(ele[0], Operations.ADD, ele[1]).execute(),
+              ele[2]
+            )
+          )
+      )
+    )
+
+    const randomElements = randomPickElements(permutation, velocity)
+    for (const ele of randomElements) {
+      const exp = new Expression(ele[0], Operations.ADD, ele[1])
+      exp.addOperationSet(Operations.ADD, ele[2])
+      this.addExpressions.push(exp)
     }
   }
 

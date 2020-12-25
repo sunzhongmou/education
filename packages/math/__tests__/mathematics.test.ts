@@ -17,6 +17,17 @@ describe('mathematics features', () => {
     expect(math.addExpressions[3].execute() <= 10).toBeTruthy()
   })
 
+  it('given loop add question capacity when generate add questions then expression created with capacity', () => {
+    const math = new Mathematics(getSequence(10))
+    const rules = new And<SourceInput>([]).addRule(
+      new AddResultLessOrEqualTo10Rule()
+    )
+    math.generateLoopAddQuestions(5, rules, rules)
+
+    expect(math.addExpressions.length).toEqual(5)
+    expect(math.addExpressions[3].execute() <= 10).toBeTruthy()
+  })
+
   it('given sub question capacity when generate sub questions then expression created with capacity', () => {
     const math = new Mathematics(getSequence(10))
     const rules = new And<SourceInput>([]).addRule(

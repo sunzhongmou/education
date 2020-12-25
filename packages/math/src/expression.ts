@@ -5,38 +5,59 @@ export enum Operations {
   SUB
 }
 
-export class Expression implements DDD.ValueObject {
-  destinationOperand: number
+interface OperationSet {
   operand: number
   operation: Operations
+}
+
+export class Expression implements DDD.ValueObject {
+  destinationOperand: number
+  operationSets: OperationSet[]
 
   constructor(destOperand: number, operation: Operations, operand: number) {
     this.destinationOperand = destOperand
-    this.operation = operation
-    this.operand = operand
+    this.operationSets = []
+    this.addOperationSet(operation, operand)
+  }
+
+  addOperationSet(operation: Operations, operand: number): void {
+    this.operationSets.push({operand, operation})
   }
 
   sameValueAs(other: Expression): boolean {
     return (
       this.destinationOperand === other.destinationOperand &&
-      this.operation === other.operation &&
-      this.operand === other.operand
+      this.operationSets === other.operationSets
+    )
+  }
+
+  getOperationSetsRaw(): string {
+    return this.operationSets.reduce(
+      (raw, oSet) =>
+        `${raw}${oSet.operation === Operations.ADD ? ' + ' : ' - '}${
+          oSet.operand
+        }`,
+      ''
     )
   }
 
   getRaw(): string {
-    return `${this.destinationOperand}${
-      this.operation === Operations.ADD ? ' + ' : ' - '
-    }${this.operand} =`
+    return `${this.destinationOperand}${this.getOperationSetsRaw()} =`
   }
 
   execute(): number {
-    switch (this.operation) {
-      case Operations.ADD:
-        return this.destinationOperand + this.operand
-      case Operations.SUB:
-        return this.destinationOperand - this.operand
+    let result = this.destinationOperand
+    for (const oSet of this.operationSets) {
+      switch (oSet.operation) {
+        case Operations.ADD:
+          result += oSet.operand
+          break
+        case Operations.SUB:
+          result -= oSet.operand
+          break
+      }
     }
-    return 0
+
+    return result
   }
 }

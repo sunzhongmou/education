@@ -16,6 +16,7 @@ export class MathematicsBuilder {
   subCapacity: number
   fillCapacity: number
   operandsInTen: boolean
+  loopAdd: boolean
 
   constructor() {
     this.maximum = 10
@@ -23,6 +24,7 @@ export class MathematicsBuilder {
     this.subCapacity = 0
     this.fillCapacity = 0
     this.operandsInTen = false
+    this.loopAdd = false
   }
 
   withMaximum(maximum: number): MathematicsBuilder {
@@ -32,6 +34,11 @@ export class MathematicsBuilder {
 
   withOperandsInTen(): MathematicsBuilder {
     this.operandsInTen = true
+    return this
+  }
+
+  withLoopAdd(): MathematicsBuilder {
+    this.loopAdd = true
     return this
   }
 
@@ -85,7 +92,16 @@ export class MathematicsBuilder {
         .addRule(new DestOperandLessOrEqualTo10Rule())
         .addRule(new OperandLessOrEqualTo10Rule())
     }
-    mathematics.generateAddQuestions(this.addCapacity, rules)
+    if (this.loopAdd) {
+      const secRules = new And<SourceInput>([])
+        .addRule(new AddResultGreaterOrEqualTo10Rule())
+        .addRule(new AddResultLessOrEqualTo20Rule())
+        .addRule(new OperandLessOrEqualTo10Rule())
+      mathematics.generateLoopAddQuestions(this.addCapacity, rules, secRules)
+    } else {
+      mathematics.generateAddQuestions(this.addCapacity, rules)
+    }
+
     const subRules = new And<SourceInput>([])
       .addRule(new SubResultGreaterOrEqualTo0Rule())
       .addRule(new DestOperandGreaterOrEqualTo10Rule())
